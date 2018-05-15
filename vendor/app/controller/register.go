@@ -64,7 +64,7 @@ func RegisterPOST(w http.ResponseWriter, r *http.Request) {
 	// If password hashing failed
 	if errp != nil {
 		log.Println(errp)
-		sess.AddFlash(view.Flash{"An error occurred on the server. Please try again later.", view.FlashError})
+		sess.AddFlash(view.Flash{"An error occurred on the server. Please try again later. password-HashingError", view.FlashError})
 		sess.Save(r, w)
 		http.Redirect(w, r, "/register", http.StatusFound)
 		return
@@ -78,7 +78,7 @@ func RegisterPOST(w http.ResponseWriter, r *http.Request) {
 		// Will only error if there is a problem with the query
 		if ex != nil {
 			log.Println(ex)
-			sess.AddFlash(view.Flash{"An error occurred on the server. Please try again later.", view.FlashError})
+			sess.AddFlash(view.Flash{"An error occurred on the server. Please try again later. query-issue", view.FlashError})
 			sess.Save(r, w)
 		} else {
 			sess.AddFlash(view.Flash{"Account created successfully for: " + email, view.FlashSuccess})
@@ -88,7 +88,7 @@ func RegisterPOST(w http.ResponseWriter, r *http.Request) {
 		}
 	} else if err != nil { // Catch all other errors
 		log.Println(err)
-		sess.AddFlash(view.Flash{"An error occurred on the server. Please try again later.", view.FlashError})
+		sess.AddFlash(view.Flash{"An error occurred on the server. Please try again later. other-errors", view.FlashError})
 		sess.Save(r, w)
 	} else { // Else the user already exists
 		sess.AddFlash(view.Flash{"Account already exists for: " + email, view.FlashError})

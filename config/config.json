@@ -1,6 +1,6 @@
 {
 	"Database": {
-		"Type": "Bolt",
+		"Type": "MySQL",
 		"Bolt": {		
  			"Path": "gowebapp.db"
   		},
@@ -10,7 +10,7 @@
 		},
 		"MySQL": {
 			"Username": "root",
-			"Password": "",
+			"Password": "gauva@123",
 			"Name": "gowebapp",
 			"Hostname": "127.0.0.1",
 			"Port": 3306,
@@ -25,9 +25,9 @@
 		"From": ""
 	},
 	"Recaptcha": {
-		"Enabled": false,
-		"Secret": "",
-		"SiteKey": ""
+		"Enabled": true,
+		"Secret": "6LfET1kUAAAAAClk5owb7UBtAgLkm4fQhVkgnQvw",
+		"SiteKey": "6LfET1kUAAAAAEWwaoslpG9g0aP8MeWvqMXpukMO"
 	},
 	"Server": {
 		"Hostname": "",

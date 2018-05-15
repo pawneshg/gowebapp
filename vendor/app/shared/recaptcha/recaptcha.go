@@ -48,9 +48,9 @@ func Plugin() template.FuncMap {
 	f["RECAPTCHA_SITEKEY"] = func() template.HTML {
 		if ReadConfig().Enabled {
 			return template.HTML(ReadConfig().SiteKey)
-		}
-
+		}else {
 		return template.HTML("")
+		}
 	}
 
 	return f

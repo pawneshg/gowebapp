@@ -95,7 +95,7 @@ func Connect(d Info) {
 		if SQL, err = sqlx.Connect("mysql", DSN(d.MySQL)); err != nil {
 			log.Println("SQL Driver Error", err)
 		}
-
+        log.Println("SQL Driver connected")
 		// Check if is alive
 		if err = SQL.Ping(); err != nil {
 			log.Println("Database Error", err)
@@ -105,6 +105,7 @@ func Connect(d Info) {
 		if BoltDB, err = bolt.Open(d.Bolt.Path, 0600, nil); err != nil {
 			log.Println("Bolt Driver Error", err)
 		}
+		log.Println("TypeBolt Driver connected")
 	case TypeMongoDB:
 		// Connect to MongoDB
 		if Mongo, err = mgo.DialWithTimeout(d.MongoDB.URL, 5*time.Second); err != nil {
@@ -114,7 +115,7 @@ func Connect(d Info) {
 
 		// Prevents these errors: read tcp 127.0.0.1:27017: i/o timeout
 		Mongo.SetSocketTimeout(1 * time.Second)
-
+        log.Println("SQL Driver connected")
 		// Check if is alive
 		if err = Mongo.Ping(); err != nil {
 			log.Println("Database Error", err)
