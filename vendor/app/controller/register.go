@@ -3,7 +3,7 @@ package controller
 import (
 	"log"
 	"net/http"
-
+    "fmt"
 	"app/model"
 	"app/shared/passhash"
 	"app/shared/recaptcha"
@@ -40,8 +40,8 @@ func RegisterPOST(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Validate with required fields
-	if validate, missingField := view.Validate(r, []string{"first_name", "last_name", "email", "password"}); !validate {
-		sess.AddFlash(view.Flash{"Field missing: " + missingField, view.FlashError})
+	if validate, missingField := view.Validate(r, []string{"first_name", "last_name", "email", "password", "password_verify"}); !validate {
+		sess.AddFlash(view.Flash{"Field missing or password not matched: " + missingField, view.FlashError})
 		sess.Save(r, w)
 		RegisterGET(w, r)
 		return
@@ -60,8 +60,16 @@ func RegisterPOST(w http.ResponseWriter, r *http.Request) {
 	lastName := r.FormValue("last_name")
 	email := r.FormValue("email")
 	password, errp := passhash.HashString(r.FormValue("password"))
+	//password_verify, errq := passhash.HashString(r.FormValue("password_verify"))
 
 	// If password hashing failed
+	if errp != nil {
+		log.Println(errp)
+		sess.AddFlash(view.Flash{"An error occurred on the server. Please try again later. password-HashingError", view.FlashError})
+		sess.Save(r, w)
+		http.Redirect(w, r, "/register", http.StatusFound)
+		return
+	}
 	if errp != nil {
 		log.Println(errp)
 		sess.AddFlash(view.Flash{"An error occurred on the server. Please try again later. password-HashingError", view.FlashError})

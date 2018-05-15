@@ -25,9 +25,9 @@
 		"From": ""
 	},
 	"Recaptcha": {
-		"Enabled": true,
-		"Secret": "6LfET1kUAAAAAClk5owb7UBtAgLkm4fQhVkgnQvw",
-		"SiteKey": "6LfET1kUAAAAAEWwaoslpG9g0aP8MeWvqMXpukMO"
+		"Enabled": false,
+		"Secret": "",
+		"SiteKey": " "
 	},
 	"Server": {
 		"Hostname": "",
