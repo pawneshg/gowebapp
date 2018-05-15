@@ -310,7 +310,7 @@ func (v *View) Render(w http.ResponseWriter) {
 
 // Validate returns true if all the required form values are passed
 func Validate(req *http.Request, required []string) (bool, string) {
-	if req.FormValue("password") != req.FormValue("password_verify"){
+	if req.FormValue("password_verify") != "" && req.FormValue("password") != req.FormValue("password_verify"){
 		return false, "password_verify"
 	}
 	for _, v := range required {

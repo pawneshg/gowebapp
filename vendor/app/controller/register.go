@@ -3,7 +3,6 @@ package controller
 import (
 	"log"
 	"net/http"
-    "fmt"
 	"app/model"
 	"app/shared/passhash"
 	"app/shared/recaptcha"
